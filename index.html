@@ -1,14 +1,298 @@
 <!DOCTYPE html>
 <html lang="ru">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Элегант - веб-интерфейс барбершопа</title>
-  <link rel="stylesheet" href="css/style.css">
-</head>
-<body>
-  <!-- Сначала подключаются данные, потом основной скрипт -->
-  <script src="js/data.js"></script>
-  <script src="js/script.js"></script>
-</body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Элегант - веб-интерфейс барбершопа</title>
+    <link rel="stylesheet" href="css/style.css" />
+  </head>
+  <body>
+    <!-- Шапка сайта: название, навигация, кнопки меню и темы -->
+    <header class="header">
+      <div class="container header__inner">
+        <a class="logo" href="#home" aria-label="Перейти на главный экран">Элегант</a>
+
+        <button
+          class="menu-button"
+          id="menuButton"
+          type="button"
+          aria-label="Открыть меню"
+        >
+          ☰
+        </button>
+
+        <nav class="nav" id="mainNav" aria-label="Основная навигация">
+          <a href="#services">Услуги</a>
+          <a href="#masters">Мастера</a>
+          <a href="#gallery">Галерея</a>
+          <a href="#appointment">Запись</a>
+          <a href="#contacts">Контакты</a>
+        </nav>
+
+        <button class="theme-button" id="themeButton" type="button">
+          Светлая тема
+        </button>
+      </div>
+    </header>
+
+    <main>
+      <!-- Главный экран -->
+      <section class="hero" id="home">
+        <div class="container hero__inner">
+          <div class="hero__text">
+            <p class="section-label">Барбершоп "Элегант"</p>
+            <h1>Мужские стрижки и уход за бородой</h1>
+            <p class="hero__description">
+              Современный барбершоп для тех, кто ценит аккуратную стрижку,
+              ухоженную бороду и спокойную атмосферу.
+            </p>
+            <div class="hero__actions">
+              <a class="button button--primary" href="#appointment">Записаться</a>
+              <a class="button button--secondary" href="#services">Посмотреть услуги</a>
+            </div>
+          </div>
+          <div class="hero__image">
+            <img src="images/hero.jpg" alt="Иллюстрация барбершопа" />
+          </div>
+        </div>
+      </section>
+
+      <!-- Преимущества -->
+      <section class="section benefits" aria-labelledby="benefits-title">
+        <div class="container">
+          <p class="section-label">Почему выбирают нас</p>
+          <h2 id="benefits-title">Преимущества барбершопа</h2>
+          <div class="benefits__grid">
+            <article class="benefit-card">
+              <h3>Опытные мастера</h3>
+              <p>
+                Специалисты работают со стрижками, бородой и уходовыми услугами.
+              </p>
+            </article>
+            <article class="benefit-card">
+              <h3>Удобная запись</h3>
+              <p>
+                Клиент может выбрать услугу и оставить данные в форме на сайте.
+              </p>
+            </article>
+            <article class="benefit-card">
+              <h3>Понятные цены</h3>
+              <p>
+                В карточках услуг сразу показаны стоимость и примерная
+                длительность.
+              </p>
+            </article>
+            <article class="benefit-card">
+              <h3>Атмосфера</h3>
+              <p>Галерея помогает передать стиль заведения и примеры работ.</p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <!-- Услуги -->
+      <section class="section" id="services" aria-labelledby="services-title">
+        <div class="container">
+          <p class="section-label">Каталог</p>
+          <h2 id="services-title">Услуги барбершопа</h2>
+          <p class="section-description">
+            Выберите услугу, которая подходит именно вам: от классической
+            стрижки до ухода за бородой и комплексного образа.
+          </p>
+
+          <div class="services-controls">
+            <div class="filter-buttons" role="group" aria-label="Фильтр услуг по категории">
+              <button
+                class="filter-button active"
+                type="button"
+                data-category="all"
+              >
+                Все
+              </button>
+              <button
+                class="filter-button"
+                type="button"
+                data-category="haircuts"
+              >
+                Стрижки
+              </button>
+              <button class="filter-button" type="button" data-category="beard">
+                Борода
+              </button>
+              <button
+                class="filter-button"
+                type="button"
+                data-category="shaving"
+              >
+                Бритьё
+              </button>
+              <button class="filter-button" type="button" data-category="care">
+                Уход
+              </button>
+              <button class="filter-button" type="button" data-category="combo">
+                Комплексы
+              </button>
+            </div>
+
+            <label class="search-label" for="serviceSearch">
+              Поиск услуги
+              <input
+                id="serviceSearch"
+                type="search"
+                placeholder="Например: стрижка"
+              />
+            </label>
+          </div>
+
+          <div class="cards-grid" id="servicesList"></div>
+          <p class="empty-message" id="servicesEmpty" hidden>
+            По вашему запросу услуги не найдены.
+          </p>
+        </div>
+      </section>
+
+      <!-- Мастера -->
+      <section
+        class="section section--dark"
+        id="masters"
+        aria-labelledby="masters-title"
+      >
+        <div class="container">
+          <p class="section-label">Команда</p>
+          <h2 id="masters-title">Мастера</h2>
+          <p class="section-description">
+            Наши мастера помогут подобрать стиль, аккуратно выполнят работу и
+            дадут простые советы по уходу.
+          </p>
+          <div class="cards-grid" id="mastersList"></div>
+        </div>
+      </section>
+
+      <!-- Галерея -->
+      <section class="section" id="gallery" aria-labelledby="gallery-title">
+        <div class="container">
+          <p class="section-label">Атмосфера</p>
+          <h2 id="gallery-title">Галерея работ</h2>
+          <div class="gallery__grid">
+            <img src="images/gallery1.jpg" alt="Пример работы барбершопа 1" />
+            <img src="images/gallery2.jpg" alt="Пример работы барбершопа 2" />
+            <img src="images/gallery3.png" alt="Пример работы барбершопа 3" />
+            <img src="images/gallery4.png" alt="Пример работы барбершопа 4" />
+          </div>
+        </div>
+      </section>
+
+      <!-- Форма записи -->
+      <section
+        class="section appointment"
+        id="appointment"
+        aria-labelledby="appointment-title"
+      >
+        <div class="container appointment__inner">
+          <div>
+            <p class="section-label">Демонстрационная запись</p>
+            <h2 id="appointment-title">Запись на услугу</h2>
+            <p class="section-description">
+              Форма не отправляет данные на сервер. После успешной проверки
+              запись сохраняется только в localStorage текущего браузера.
+            </p>
+            <div class="saved-appointment" id="savedAppointment" hidden></div>
+          </div>
+
+          <form class="appointment-form" id="appointmentForm" novalidate>
+            <label>
+              Имя клиента
+              <input
+                id="clientName"
+                name="clientName"
+                type="text"
+                placeholder="Введите имя"
+              />
+            </label>
+
+            <label>
+              Телефон
+              <input
+                id="phone"
+                name="phone"
+                type="tel"
+                placeholder="+7 (___) ___-__-__"
+              />
+            </label>
+
+            <label>
+              Услуга
+              <select id="serviceSelect" name="serviceSelect">
+                <option value="">Выберите услугу</option>
+              </select>
+            </label>
+
+            <label>
+              Мастер
+              <select id="masterSelect" name="masterSelect">
+                <option value="">Без выбора мастера</option>
+              </select>
+            </label>
+
+            <label>
+              Дата
+              <input id="date" name="date" type="date" />
+            </label>
+
+            <label>
+              Время
+              <input id="time" name="time" type="time" />
+            </label>
+
+            <button class="button button--primary" type="submit">
+              Сохранить запись
+            </button>
+            <p class="form-message" id="formMessage" role="status"></p>
+          </form>
+        </div>
+      </section>
+
+      <!-- Контакты -->
+      <section
+        class="section contacts"
+        id="contacts"
+        aria-labelledby="contacts-title"
+      >
+        <div class="container contacts__inner">
+          <div>
+            <p class="section-label">Как нас найти</p>
+            <h2 id="contacts-title">Контакты</h2>
+            <p>Адрес: г. Ставрополь, проспект Кулакова, 2</p>
+            <p>
+              Телефон:
+              <a href="tel:+70000000000" class="contacts__tel"
+                >+7 (000) 000-00-00</a
+              >
+            </p>
+            <p>Режим работы: ежедневно с 10:00 до 21:00</p>
+          </div>
+          <div class="contacts__map">
+            <h3>Как добраться</h3>
+            <p>Мы находимся по адресу: г. Ставрополь, проспект Кулакова, 2.</p>
+            <p>
+              Промышленный район города, удобно добраться на автомобиле или
+              общественном транспорте.
+            </p>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- Подвал -->
+    <footer class="footer">
+      <div class="container footer__inner">
+        <p>© 2026 Элегант</p>
+        <p>Учебный frontend-проект без серверной части</p>
+      </div>
+    </footer>
+
+    <!-- Сначала подключаются данные, потом основной скрипт -->
+    <script src="js/data.js"></script>
+    <script src="js/script.js"></script>
+  </body>
 </html>
