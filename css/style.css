@@ -476,3 +476,77 @@ select:focus {
   align-items: center;
   gap: 16px;
 }
+
+/* Адаптивность */
+@media (max-width: 900px) {
+  .menu-button {
+    display: block;
+  }
+
+  .nav {
+    position: absolute;
+    left: 4%;
+    right: 4%;
+    top: 72px;
+    display: none;
+    flex-direction: column;
+    align-items: flex-start;
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 16px;
+  }
+
+  .nav.open {
+    display: flex;
+  }
+
+  .hero__inner,
+  .appointment__inner,
+  .contacts__inner {
+    grid-template-columns: 1fr;
+  }
+
+  .benefits__grid,
+  .cards-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .gallery__grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .services-controls {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .search-label {
+    min-width: 0;
+  }
+}
+
+@media (max-width: 600px) {
+  .section,
+  .hero {
+    padding: 56px 0;
+  }
+
+  .theme-button {
+    padding: 8px 10px;
+    font-size: 14px;
+  }
+
+  .benefits__grid,
+  .cards-grid,
+  .gallery__grid,
+  .appointment-form {
+    grid-template-columns: 1fr;
+  }
+
+  .footer__inner {
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+  }
+}

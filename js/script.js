@@ -327,6 +327,18 @@ mastersList.addEventListener('click', (event) => {
   }
 });
 
+// Мобильное меню.
+menuButton.addEventListener('click', () => {
+  mainNav.classList.toggle('open');
+});
+
+// После выбора пункта меню мобильное меню закрывается.
+mainNav.addEventListener('click', (event) => {
+  if (event.target.tagName === 'A') {
+    mainNav.classList.remove('open');
+  }
+});
+
 // Обработка клика по кнопки переключения тем.
 themeButton.addEventListener('click', toggleTheme);
 
