@@ -214,6 +214,7 @@ body.light-theme .header {
 }
 
 .hero__image img {
+  /* Фиксируем пропорции, чтобы фото не растягивало главный экран. */
   width: 100%;
   aspect-ratio: 4 / 3;
   max-height: 560px;
@@ -300,10 +301,12 @@ select:focus {
 }
 
 .input-error {
+  /* Красная рамка появляется у незаполненных обязательных полей. */
   border-color: var(--error);
 }
 
 .cards-grid {
+  /* На больших экранах карточки выводятся в три колонки. */
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 20px;
@@ -319,11 +322,13 @@ select:focus {
 
 .service-card:hover,
 .master-card:hover {
+  /* При наведении карточка немного поднимается вверх. */
   transform: translateY(-6px);
 }
 
 .service-card img,
 .master-card img {
+  /* Одинаковая высота картинок сохраняет ровный вид карточек. */
   width: 100%;
   height: 170px;
   object-fit: cover;
@@ -332,6 +337,7 @@ select:focus {
 }
 
 .master-card img {
+  /* Фото мастеров показываются чуть выше центра, чтобы лучше было видно лицо. */
   object-position: center 25%;
 }
 
@@ -365,6 +371,7 @@ select:focus {
 }
 
 .gallery__grid img {
+  /* Квадратная область не даёт разным фото ломать сетку галереи. */
   width: 100%;
   aspect-ratio: 1 / 1;
   object-fit: cover;
@@ -387,6 +394,7 @@ select:focus {
 }
 
 .appointment-form {
+  /* На широком экране поля формы стоят в две колонки. */
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 16px;
@@ -479,10 +487,12 @@ select:focus {
 
 /* Адаптивность */
 @media (max-width: 900px) {
+  /* На планшетах показываем кнопку меню вместо обычной навигации. */
   .menu-button {
     display: block;
   }
 
+  /* Меню становится выпадающим блоком под шапкой. */
   .nav {
     position: absolute;
     left: 4%;
@@ -501,21 +511,25 @@ select:focus {
     display: flex;
   }
 
+  /* Основные двухколоночные блоки перестраиваются в один столбец. */
   .hero__inner,
   .appointment__inner,
   .contacts__inner {
     grid-template-columns: 1fr;
   }
 
+  /* Карточек становится меньше в строке, чтобы они не сжимались. */
   .benefits__grid,
   .cards-grid {
     grid-template-columns: repeat(2, 1fr);
   }
 
+  /* Галерея на планшетах выводится по две картинки в ряд. */
   .gallery__grid {
     grid-template-columns: repeat(2, 1fr);
   }
 
+  /* Фильтры и поиск становятся друг под другом. */
   .services-controls {
     align-items: stretch;
     flex-direction: column;
@@ -527,16 +541,19 @@ select:focus {
 }
 
 @media (max-width: 600px) {
+  /* На телефонах уменьшаем вертикальные отступы секций. */
   .section,
   .hero {
     padding: 56px 0;
   }
 
+  /* Кнопка темы становится компактнее, чтобы поместиться в шапке. */
   .theme-button {
     padding: 8px 10px;
     font-size: 14px;
   }
 
+  /* На маленьком экране все сетки становятся в один столбец. */
   .benefits__grid,
   .cards-grid,
   .gallery__grid,
@@ -544,6 +561,7 @@ select:focus {
     grid-template-columns: 1fr;
   }
 
+  /* Подвал выравнивается по центру, чтобы текст не был прижат к краям. */
   .footer__inner {
     flex-direction: column;
     justify-content: center;

@@ -60,9 +60,11 @@ const StorageService = {
 
 // Вывод карточек услуг на страницу.
 function renderServices(items) {
+  // Сначала очищаем список, потом добавляем подходящие карточки заново.
   servicesList.innerHTML = '';
 
   if (items.length === 0) {
+    // Если услуг нет, показываем сообщение вместо пустого блока.
     servicesEmpty.hidden = false;
     return;
   }
@@ -91,6 +93,7 @@ function renderServices(items) {
 
 // Вывод карточек мастеров.
 function renderMasters() {
+  // Карточки мастеров создаются из массива masters.
   mastersList.innerHTML = '';
 
   masters.forEach((master) => {
@@ -114,6 +117,7 @@ function renderMasters() {
 
 // Заполнение выпадающих списков в форме записи.
 function fillFormSelects() {
+  // Заполняем выпадающие списки услугами и мастерами из data.js.
   services.forEach((service) => {
     const option = document.createElement('option');
     option.value = service.id;
@@ -131,6 +135,7 @@ function fillFormSelects() {
 
 // Фильтрация и поиск услуг работают вместе.
 function updateServices() {
+  // Берём текст поиска и фильтруем услуги по категории и названию.
   const searchText = serviceSearch.value.trim().toLowerCase();
 
   const filtered = services.filter((service) => {
@@ -187,16 +192,19 @@ function handleFormChange(event) {
   const field = event.target;
 
   if (field.matches('input, select')) {
+    // Убираем ошибку только с того поля, которое пользователь изменил.
     field.classList.remove('input-error');
   }
 
   if (formMessage.classList.contains('success')) {
+    // Успешное сообщение исчезает сразу после нового изменения формы.
     formMessage.textContent = '';
     formMessage.className = 'form-message';
     return;
   }
 
   if (formMessage.classList.contains('error') && areRequiredFieldsFilled()) {
+    // Сообщение об ошибке убирается только когда все обязательные поля заполнены.
     formMessage.textContent = '';
     formMessage.className = 'form-message';
   }
@@ -204,6 +212,7 @@ function handleFormChange(event) {
 
 // Проверка формы. Мастер не обязателен.
 function validateForm() {
+  // Перед новой проверкой убираем старую подсветку ошибок.
   clearInputErrors();
 
   const requiredFields = getRequiredFields();
@@ -212,6 +221,7 @@ function validateForm() {
 
   requiredFields.forEach((field) => {
     if (!field.value.trim()) {
+      // Пустые обязательные поля выделяются красной рамкой.
       field.classList.add('input-error');
       isValid = false;
     }
@@ -222,6 +232,7 @@ function validateForm() {
 
 // Обработка отправки формы записи.
 function handleAppointmentSubmit(event) {
+  // Отменяем обычную отправку формы, чтобы страница не перезагружалась.
   event.preventDefault();
 
   if (!validateForm()) {
@@ -230,6 +241,7 @@ function handleAppointmentSubmit(event) {
   }
 
   const appointment = {
+    // Собираем данные формы в один объект для сохранения.
     clientName: document.getElementById('clientName').value.trim(),
     phone: document.getElementById('phone').value.trim(),
     serviceId: serviceSelect.value,
@@ -249,6 +261,7 @@ function renderSavedAppointment() {
   const appointment = StorageService.getAppointment();
 
   if (!appointment) {
+    // Если сохранённой записи нет, блок с записью скрывается.
     savedAppointment.hidden = true;
     savedAppointment.innerHTML = '';
     return;
@@ -257,6 +270,7 @@ function renderSavedAppointment() {
   const service = services.find((item) => item.id === appointment.serviceId);
   const master = masters.find((item) => item.id === appointment.masterId);
 
+  // Показываем сохранённую запись в понятном виде.
   savedAppointment.hidden = false;
   savedAppointment.innerHTML = `
     <h3>Последняя сохранённая запись</h3>
